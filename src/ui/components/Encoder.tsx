@@ -1,3 +1,4 @@
+import { t } from "../i18n.ts";
 import { useId, useRef, useState, type ReactNode } from "react";
 import { SLOTS } from "../colors.ts";
 
@@ -41,7 +42,7 @@ export function Encoder(props: EncoderSpec & { slot: number }) {
   return (
     <div className="encoder" style={{ "--slot": color } as React.CSSProperties}>
       <label className="enc-label" htmlFor={id}>
-        {label}
+        {t(label)}
       </label>
       <div
         className="enc-dial"
@@ -116,7 +117,7 @@ export function EncoderPages(props: { pages: EncoderPage[]; footer?: ReactNode; 
         <div className="enc-tabs" role="group" aria-label={`${props.label} pages`}>
           {props.pages.map((pg, i) => (
             <button key={pg.name} type="button" className={`enc-tab${i === page ? " on" : ""}`} aria-pressed={i === page} onClick={() => setPage(i)}>
-              {pg.name}
+              {t(pg.name)}
             </button>
           ))}
         </div>

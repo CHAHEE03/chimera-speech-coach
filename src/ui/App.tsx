@@ -22,6 +22,7 @@ import type { BodyName } from "../worklet/protocol.ts";
 import { BodyPad } from "./components/BodyPad.tsx";
 import { ResizeGrip } from "./components/ResizeGrip.tsx";
 import { presetOf, PRESETS } from "./body.ts";
+import { lang, setLang, t, type Lang } from "./i18n.ts";
 
 // three.js only loads when the 3D view is first shown
 const AnatomyView3D = lazy(() => import("./components/AnatomyView3D.tsx").then((m) => ({ default: m.AnatomyView3D })));
@@ -54,7 +55,7 @@ function TopBar() {
     <header className="topbar">
       <div className="brand">
         <span className="wordmark">Chimera</span>
-        <span className="tagline">A voice grown from a simulated airway</span>
+        <span className="tagline">{t("A voice grown from a simulated airway")}</span>
       </div>
       <Segmented<Mode>
         label="Mode"
@@ -79,19 +80,20 @@ function TopBar() {
       />
       <div className="topbar-right">
         <label className="volume">
-          <span>Volume</span>
+          <span>{t("Volume")}</span>
           <input type="range" min={0} max={1} step={0.01} value={volume} onChange={(e) => setVolume(Number(e.target.value))} style={{ "--pos": `${volume * 100}%` } as React.CSSProperties} />
         </label>
         {stopped ? (
           <span className="load error">{stopped}</span>
         ) : started ? (
           <span className="load" title={"Share of the audio thread's time budget used by the simulation" + (light ? ". This device couldn't keep up at 48 kHz, so the voice runs at 32 kHz: lighter, a little duller. Reload to try 48 kHz again." : "")}>
-            Engine load {Math.round(load * 100)} %{light && " · 32 kHz"}
+            {t("Engine load")} {Math.round(load * 100)} %{light && " · 32 kHz"}
           </span>
         ) : null}
+        <Segmented<Lang> label="Language" value={lang} onChange={setLang} options={[{ value: "ko", label: "한국어" }, { value: "en", label: "EN" }]} />
         {!inPlugin && (
           <a className="plugin-link" href="/plugin/" title="CHIMERA as a CLAP, VST3 and AU plugin for your DAW">
-            Plugin
+            {t("Plugin")}
           </a>
         )}
         {!inPlugin && (

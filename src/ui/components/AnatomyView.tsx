@@ -1,3 +1,4 @@
+import { t } from "../i18n.ts";
 import { useEffect, useRef, useState } from "react";
 import { recording } from "../../song/record.ts";
 import { AnatomyRenderer, type FaceView, type HandleId, type Slot } from "../render/anatomy.ts";
@@ -21,7 +22,7 @@ export type OverlayFn = (ctx: CanvasRenderingContext2D, r: FaceView, m: VoiceMod
 
 /** the tract's length and mouth opening, then the live pitch and lungs */
 export const tractInfo: InfoFn = (_m, f, tele) => {
-  const info = [`Tract ${f.length.toFixed(1)} cm`, `Mouth ${f.lipArea.toFixed(1)} cm²`];
+  const info = [`${t("Tract")} ${f.length.toFixed(1)} cm`, `${t("Mouth")} ${f.lipArea.toFixed(1)} cm²`];
   if (tele) info.push(`F0 ${tele.t.f0.toFixed(1)} Hz`, `Lungs ${tele.t.pLung.toFixed(1)} cmH₂O`);
   return info;
 };

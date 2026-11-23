@@ -6,11 +6,12 @@
  * Beams are drawn additively ("lighter"), so where lines cross they get brighter, like a beam.
  */
 import { TEXT, V, core } from "../colors.ts";
+import { t } from "../i18n.ts";
 
 export type Pt = [number, number];
 
-/** Hershey Simplex first; anything it lacks (IPA, ², ×) falls back to Archivo, which covers IPA. */
-export const HERSHEY = '"Hershey", "Archivo", system-ui, sans-serif';
+/** Hershey Simplex first; anything it lacks (IPA, ², ×) falls back to Archivo, which covers IPA, then a Korean system font for Hangul. */
+export const HERSHEY = '"Hershey", "Archivo", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif';
 /**
  * Canvas font. Hershey Light is a hairline at label sizes, so it is used only for display sizes
  * (20 px and up); smaller text is always Medium.
@@ -139,6 +140,7 @@ export interface LabelOpts {
  * alpha is for text fading in or out.
  */
 export function label(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, o: LabelOpts = {}): void {
+  text = t(text);
   const size = labelSize(o);
   ctx.save();
   ctx.font = hfont(size, o.weight);
@@ -166,7 +168,7 @@ export function labelWidth(ctx: CanvasRenderingContext2D, text: string, o: Label
   ctx.save();
   ctx.font = hfont(size, o.weight);
   if (hasLetterSpacing) (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = `${labelTracking(o, size).toFixed(2)}px`;
-  const wd = ctx.measureText(text).width;
+  const wd = ctx.measureText(t(text)).width;
   ctx.restore();
   return wd;
 }

@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { mic } from "../mic.ts";
+import { t } from "../i18n.ts";
 import { Chip } from "./Screen.tsx";
 import { usePhosphor } from "../usePhosphor.ts";
 import { engine } from "../../audio/AudioEngine.ts";
@@ -51,7 +52,7 @@ export function MicButton() {
   };
   return (
     <Chip on={on} onClick={() => void toggle()} title={on ? "Microphone on: say a vowel. Press to turn off." : "Show your own vowels (the browser asks for the microphone)."}>
-      MIC{err ? `: ${err}` : ""}
+      {err ? `${t("Mic")}: ${t(err)}` : t("Mic")}
     </Chip>
   );
 }

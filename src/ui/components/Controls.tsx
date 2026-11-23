@@ -1,3 +1,4 @@
+import { t } from "../i18n.ts";
 import { useId } from "react";
 
 export function Slider(props: {
@@ -39,7 +40,7 @@ export function Toggle(props: { label: string; checked: boolean; onChange: (v: b
   return (
     <label className="toggle">
       <input type="checkbox" checked={props.checked} onChange={(e) => props.onChange(e.target.checked)} />
-      <span>{props.label}</span>
+      <span>{t(props.label)}</span>
     </label>
   );
 }
@@ -49,7 +50,7 @@ export function Segmented<T extends string>(props: { value: T | null; options: {
     <div className="segmented" role="radiogroup" aria-label={props.label}>
       {props.options.map((o) => (
         <button key={o.value} role="radio" aria-checked={props.value === o.value} className={props.value === o.value ? "on" : ""} onClick={() => props.onChange(o.value)}>
-          {o.label}
+          {t(o.label)}
         </button>
       ))}
     </div>

@@ -1,3 +1,4 @@
+import { t } from "../i18n.ts";
 import { useEffect, useRef, type ReactNode } from "react";
 import { useStore } from "../store.ts";
 
@@ -54,7 +55,7 @@ export function PrimaryButton(props: { label: string; playing?: boolean; busy?: 
   return (
     <button type="button" className={`act-primary${props.playing ? " on" : ""}${props.className ? " " + props.className : ""}`} onClick={props.onClick} disabled={starting || !!props.busy} title={props.title}>
       <span className={`act-icon ${props.playing ? "stop" : (props.icon ?? "play")}`} aria-hidden="true" />
-      {text}
+      {t(text)}
     </button>
   );
 }

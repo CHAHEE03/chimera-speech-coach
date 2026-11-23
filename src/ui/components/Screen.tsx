@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { t } from "../i18n.ts";
 
 /**
  * One screen on the wall: a black panel with a thin frame and a single-stroke title.
@@ -12,9 +13,9 @@ export function Screen(props: { title?: string; sub?: string; lead?: ReactNode; 
     <section className={`screen${focus ? " focus" : ""}${className ? " " + className : ""}`} aria-label={label ?? title}>
       {(title || lead || sub || tools) && (
         <header className="screen-head">
-          {title && <h2 className="screen-title">{title}</h2>}
+          {title && <h2 className="screen-title">{t(title)}</h2>}
           {lead}
-          {sub && <span className="screen-sub">{sub}</span>}
+          {sub && <span className="screen-sub">{t(sub)}</span>}
           {tools && <div className="screen-tools">{tools}</div>}
         </header>
       )}
@@ -28,7 +29,7 @@ export function Chip(props: ButtonHTMLAttributes<HTMLButtonElement> & { on?: boo
   const { on, toggle = true, tone, className, children, ...rest } = props;
   return (
     <button type="button" {...rest} className={`chip${on ? " on" : ""}${tone ? " " + tone : ""}${className ? " " + className : ""}`} aria-pressed={toggle ? !!on : undefined}>
-      {children}
+      {typeof children === "string" ? t(children) : children}
     </button>
   );
 }
