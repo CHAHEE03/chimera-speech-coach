@@ -6,7 +6,7 @@ import { AnatomyView } from "./components/AnatomyView.tsx";
 import { TubeView } from "./components/TubeView.tsx";
 import { Stroboscope } from "./components/Stroboscope.tsx";
 import { SpectrumView } from "./components/SpectrumView.tsx";
-import { VowelMap } from "./components/VowelMap.tsx";
+import { MicButton, VowelMap } from "./components/VowelMap.tsx";
 import { VoiceControls } from "./components/VoiceControls.tsx";
 import { Keys, MidiButton } from "./components/Keys.tsx";
 import { ActionBar, PrimaryButton } from "./components/ActionBar.tsx";
@@ -191,7 +191,7 @@ function PlayRight() {
       <Screen className="s-spec" title="Spectrum">
         <SpectrumView />
       </Screen>
-      <Screen className="s-vowels" title="Vowels" sub="F1 / F2">
+      <Screen className="s-vowels" title="Vowels" sub="F1 / F2" tools={<MicButton />}>
         <VowelMap />
       </Screen>
       <Screen className="s-voice" title="Voice">
